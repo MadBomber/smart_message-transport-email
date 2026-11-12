@@ -1,0 +1,37 @@
+module SmartMessage
+  module Transport
+    module Email
+      VERSION: String
+
+      class ImapReader
+        FETCH_BATCH: Integer
+
+        attr_reader address: String?
+        attr_reader port: Integer
+        attr_reader mailbox: String
+        attr_reader after_receive: Symbol
+
+        def initialize: (?address: String?, ?port: Integer, ?user_name: String?, ?password: String?, ?ssl: bool | Hash[Symbol, untyped],
+                         ?mailbox: String, ?after_receive: Symbol, ?logger: untyped) -> void
+        def each_message: (Array[String] class_names) { (String raw) -> boolish } -> void
+      end
+    end
+
+    class EmailTransport < Base
+      CLASS_HEADER: String
+      VERSION_HEADER: String
+      AFTER_RECEIVE: Array[Symbol]
+
+      def self.payload_of: (Mail::Message mail) -> String
+
+      def recipients_for: (String | Symbol message_class) -> Array[String]
+      def build_mail: (String message_class, String serialized_message) -> Mail::Message
+      def do_publish: (String message_class, String serialized_message) -> void
+      def poll: () -> Integer
+      def reader: () -> untyped
+      def connected?: () -> bool
+      def connect: () -> void
+      def disconnect: () -> void
+    end
+  end
+end

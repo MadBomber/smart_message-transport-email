@@ -1,0 +1,35 @@
+AllCops:
+  TargetRubyVersion: 4.0
+  NewCops: enable
+  SuggestExtensions: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Metrics:
+  Exclude:
+    - "test/**/*"
+
+Naming/MethodParameterName:
+  Exclude:
+    - "test/**/*"
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+# Methods that report whether to acknowledge an email have side effects;
+# a "?" name would hide them.
+Naming/PredicateMethod:
+  Enabled: false
